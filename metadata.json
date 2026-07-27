@@ -1,0 +1,6 @@
+{
+  "name": "NutriLines",
+  "description": "AI-powered healthcare assistant that helps users analyze, organize, and monitor medical reports, medications, EMR, and appointments with Arabic simplified explanations.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

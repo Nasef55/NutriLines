@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profile",
+      "description": "Patient account and health score",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "bloodType": { "type": "string" },
+        "healthScore": { "type": "number" },
+        "chronicConditions": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["name", "email", "healthScore"]
+    },
+    "reports": {
+      "title": "Medical Report",
+      "description": "Lab report OCR analysis and Arabic interpretations",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "labName": { "type": "string font" },
+        "date": { "type": "string" },
+        "doctorName": { "type": "string" },
+        "overallSummary": { "type": "string" },
+        "arabicSummary": { "type": "string" },
+        "isAbnormal": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "overallSummary", "arabicSummary"]
+    },
+    "medications": {
+      "title": "Medication Prescription",
+      "description": "Pill schedule, dose times, and remaining count",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "dosage": { "type": "string" },
+        "frequency": { "type": "string" },
+        "timesOfDay": { "type": "array", "items": { "type": "string" } },
+        "purpose": { "type": "string" },
+        "instructions": { "type": "string" },
+        "totalPills": { "type": "number" },
+        "remainingPills": { "type": "number" },
+        "takenToday": { "type": "boolean" }
+      },
+      "required": ["name", "dosage", "takenToday"]
+    },
+    "appointments": {
+      "title": "Doctor Appointment",
+      "description": "Scheduled clinic appointments and reminders",
+      "type": "object",
+      "properties": {
+        "doctorName": { "type": "string" },
+        "specialty": { "type": "string" },
+        "clinicName": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "location": { "type": "string font" },
+        "status": { "type": "string" },
+        "reminderSet": { "type": "boolean" }
+      },
+      "required": ["doctorName", "date", "time"]
+    }
+  }
+}
