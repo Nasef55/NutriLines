@@ -20,6 +20,9 @@ export default async function handler(req: any, res: any) {
 
     const { imageBase64, rawText, sampleType } = req.body;
 
+    console.log("IMAGE:", imageBase64 ? "YES" : "NO");
+console.log("IMAGE SIZE:", imageBase64?.length);
+
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -110,6 +113,21 @@ if (imageBase64) {
     inlineData: {
       mimeType: "image/jpeg",
       data: imageBase64.replace(/^data:image\/\w+;base64,/, ""),
+    },
+  });
+}
+
+const contents: any[] = [
+  {
+    text: prompt,
+  },
+];
+
+if (imageBase64) {
+  contents.push({
+    inlineData: {
+      mimeType: "image/jpeg",
+      data: imageBase64.split(",")[1],
     },
   });
 }
