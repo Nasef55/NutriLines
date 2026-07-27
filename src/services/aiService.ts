@@ -31,7 +31,7 @@ export async function analyzeReportWithAI(params: {
   sampleType?: string;
 }): Promise<AnalysisResponse> {
   try {
-    const res = await fetch('https://nutri-lines.vercel.app/api/analyze-report', {
+    const res = await fetch('/api/analyze-report', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
