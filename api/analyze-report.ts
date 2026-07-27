@@ -34,22 +34,47 @@ export default async function handler(req: any, res: any) {
     });
 
 
-    const prompt = `
-You are NutriLines AI medical assistant.
+const prompt = `
+You are NutriLines AI, a medical report analysis assistant.
 
-Analyze this medical report.
+Your task is to analyze the attached medical report image and extract real laboratory information.
 
-Rules:
-- Extract only actual laboratory values.
-- Explain results in Arabic.
-- Classify each result as Normal, High, or Low.
-- Do not invent data.
+IMPORTANT RULES:
+- Carefully read the uploaded image using vision capabilities.
+- Extract ONLY values that are clearly visible in the report.
+- Do NOT use previous examples or generate fake laboratory values.
+- Do NOT return the same analysis for different images.
+- Each uploaded image must be analyzed independently.
+- If the image is unclear or does not contain a medical report, explain that clearly.
+- Do not guess missing values.
 
-Report text:
-${rawText || "Image attached. Extract data from the image."}
+Return ONLY valid JSON with this structure:
 
-Sample type:
-${sampleType || "Unknown"}
+{
+  "reportTitle": "",
+  "laboratoryName": "",
+  "patientName": "",
+  "reportDate": "",
+  "overallSummary": "",
+  "arabicSummary": "",
+  "results": [
+    {
+      "testName": "",
+      "value": "",
+      "unit": "",
+      "referenceRange": "",
+      "status": "Normal | High | Low",
+      "arabicExplanation": "",
+      "clinicalNote": ""
+    }
+  ],
+  "actionableAdvice": []
+}
+
+Additional information:
+Sample type: ${sampleType || "Unknown"}
+Text extracted from report (if available):
+${rawText || "No text available. Use the image."}
 `;
 
 
@@ -74,8 +99,23 @@ if (imageBase64) {
 }
 
 
+const contents: any[] = [
+  {
+    text: prompt,
+  },
+];
+
+if (imageBase64) {
+  contents.push({
+    inlineData: {
+      mimeType: "image/jpeg",
+      data: imageBase64.replace(/^data:image\/\w+;base64,/, ""),
+    },
+  });
+}
+
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-2.5-flash",
   contents,
   config: {
     responseMimeType: "application/json",
