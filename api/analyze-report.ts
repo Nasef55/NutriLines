@@ -45,21 +45,42 @@ Rules:
 - Classify each result as Normal, High, or Low.
 - Do not invent data.
 
-Report:
-${rawText || "No text provided"}
+Report text:
+${rawText || "Image attached. Extract data from the image."}
 
 Sample type:
 ${sampleType || "Unknown"}
 `;
 
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-      },
-    });
+const contents: any[] = [
+  {
+    text: prompt,
+  },
+];
+
+
+if (imageBase64) {
+
+  const base64Data = imageBase64.split(",")[1];
+
+  contents.push({
+    inlineData: {
+      mimeType: "image/jpeg",
+      data: base64Data,
+    },
+  });
+
+}
+
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.6-flash",
+  contents,
+  config: {
+    responseMimeType: "application/json",
+  },
+});
 
 
     const result = JSON.parse(response.text || "{}");
