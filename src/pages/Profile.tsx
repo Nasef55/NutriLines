@@ -204,9 +204,7 @@ const handleLogout = async () => {
   </div>
 )}
 
-        </div>
-
-
+        
       </div>
 
 
