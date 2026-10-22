@@ -116,39 +116,43 @@ const handleLogout = async () => {
       <div className="bg-white rounded-2xl shadow p-6">
 
 
-        <div className="flex items-center gap-5">
 
-          <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-4xl">
-            👨
-          </div>
+<div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+  <div className="flex min-w-0 items-center gap-4">
+    <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-blue-100 text-4xl">
+      👨
+    </div>
 
+    <div className="min-w-0">
+      <h2 className="break-words text-xl font-bold">
+        {userData?.name || "User"}
+      </h2>
 
-          <div>
+      <p className="break-all text-sm text-gray-500">
+        {userData?.email}
+      </p>
+    </div>
+  </div>
 
-            <h2 className="text-xl font-bold">
-              {userData?.name || "User"}
-            </h2>
+  <div className="flex w-full flex-col gap-3 sm:ml-auto sm:w-auto sm:min-w-36">
+    <button
+      type="button"
+      onClick={() => setEditMode(!editMode)}
+      className="w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+    >
+      {editMode ? "Cancel" : "✏️ Edit Profile"}
+    </button>
 
-            <p className="text-gray-500">
-              {userData?.email}
-            </p>
+    <button
+      type="button"
+      onClick={handleLogout}
+      className="w-full rounded-xl border border-red-200 bg-red-600 px-5 py-3 font-bold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+    >
+      🚪 Logout
+    </button>
+  </div>
+</div>
 
-          </div>
-
-<button
-  onClick={() => setEditMode(!editMode)}
-  className="mt-5 bg-blue-600 text-white px-5 py-2 rounded-xl"
->
-  {editMode ? "Cancel" : "✏️ Edit Profile"}
-</button>
-
-
-<button
-  onClick={handleLogout}
-  className="mt-3 bg-red-600 text-white px-5 py-2 rounded-xl"
->
-  🚪 Logout
-</button>
 
 
 {editMode && (
