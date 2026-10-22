@@ -1,3 +1,5 @@
+import Pharmacy from "./pages/Pharmacy";
+import Doctors from "./pages/Doctors";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
@@ -88,6 +90,24 @@ if(loading){
   element={
     <ProtectedRoute>
       <Medications />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/doctors"
+  element={
+    <ProtectedRoute>
+      <Doctors />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pharmacy"
+  element={
+    <ProtectedRoute>
+      <Pharmacy />
     </ProtectedRoute>
   }
 />

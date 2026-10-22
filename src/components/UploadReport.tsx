@@ -36,7 +36,7 @@ function UploadReport({
 
     const snapshot = await getDocs(q);
 
-const data = snapshot.docs.map((doc) => ({
+const data: any[] = snapshot.docs.map((doc) => ({
   id: doc.id,
   ...doc.data(),
 }));

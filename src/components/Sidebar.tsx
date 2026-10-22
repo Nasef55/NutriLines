@@ -50,6 +50,20 @@ function Sidebar() {
   💊 Medications
 </Link>
 
+<Link
+  to="/doctors"
+  className="block w-full text-left p-3 rounded-xl hover:bg-blue-50"
+>
+  👨‍⚕️ Doctor Consultation
+</Link>
+
+
+<Link
+  to="/pharmacy"
+  className="block w-full text-left p-3 rounded-xl hover:bg-blue-50"
+>
+  💊 Pharmacy
+</Link>
 
 <Link
   to="/profile"

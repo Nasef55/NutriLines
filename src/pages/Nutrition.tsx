@@ -69,10 +69,10 @@ console.log("Number of analyses:", snapshot.size);
 
 if (!snapshot.empty) {
 
-  const analyses = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data()
-  }));
+const analyses: any[] = snapshot.docs.map((doc) => ({
+  id: doc.id,
+  ...doc.data()
+}));
 
 
 const latestAnalysis = analyses

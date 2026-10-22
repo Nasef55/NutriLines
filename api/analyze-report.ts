@@ -87,47 +87,11 @@ const contents: any[] = [
   },
 ];
 
-
-if (imageBase64) {
-
-  const base64Data = imageBase64.split(",")[1];
-
-  contents.push({
-    inlineData: {
-      mimeType: "image/jpeg",
-      data: base64Data,
-    },
-  });
-
-}
-
-
-const contents: any[] = [
-  {
-    text: prompt,
-  },
-];
-
 if (imageBase64) {
   contents.push({
     inlineData: {
       mimeType: "image/jpeg",
       data: imageBase64.replace(/^data:image\/\w+;base64,/, ""),
-    },
-  });
-}
-
-const contents: any[] = [
-  {
-    text: prompt,
-  },
-];
-
-if (imageBase64) {
-  contents.push({
-    inlineData: {
-      mimeType: "image/jpeg",
-      data: imageBase64.split(",")[1],
     },
   });
 }
