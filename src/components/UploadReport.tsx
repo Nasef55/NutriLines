@@ -121,6 +121,14 @@ setReports(data);
       });
 
 
+      if (!aiResponse.success || !aiResponse.analysis) {
+      alert(aiResponse.error || "فشل تحليل التقرير. حاول مرة أخرى.");
+      return;
+      }
+
+      console.log("AI response:", aiResponse);
+      console.log("AI success:", aiResponse.success);
+
 
       await addDoc(
         collection(db,"analyses"),

@@ -208,12 +208,31 @@ ${String(rawText || "No OCR text available")}
       source: "vercel-gemini",
       analysis: result,
     });
-  } catch (error: any) {
-    console.error("Report analysis failed:", error);
 
-    return res.status(500).json({
+} catch (error: any) {
+  console.error("Report analysis failed:", error);
+
+  const status = Number(
+    error?.status ?? error?.statusCode ?? error?.error?.code
+  );
+
+  if (status === 503 || status === 429 || status === 504) {
+    return res.status(status).json({
       success: false,
-      error: "Report analysis failed. Please try again.",
+      source: "vercel-gemini",
+      code: "AI_TEMPORARILY_UNAVAILABLE",
+      error:
+        status === 429
+          ? "خدمة التحليل وصلت إلى حد الطلبات المسموح به. حاول لاحقًا."
+          : "خدمة التحليل مشغولة حاليًا. استنى دقيقة وجرب تاني.",
     });
   }
+
+  return res.status(500).json({
+    success: false,
+    source: "vercel-gemini",
+    error: "فشل تحليل التقرير. حاول مرة أخرى.",
+  });
+}
+
 }
